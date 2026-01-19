@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Responsive Banking UI</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.balance {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+input {
+    padding: 10px;
+    font-size: 18px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+button {
+    width: 50%;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+}
+
+.deposit {
+    background: #0d6efd;
+}
+
+.withdraw {
+    background: #dc3545;
+}
+
+.message {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .container {
+        width: 90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="balance">Balance: $<span id="balance">0</span></div>
+
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <div class="buttons">
+        <button class="deposit" onclick="deposit()">Deposit</button>
+        <button class="withdraw" onclick="withdraw()">Withdraw</button>
+    </div>
+
+    <div class="message" id="message"></div>
+</div>
+
+<script>
+let balance = 0;   // Balance starts from 0
+
+function deposit() {
+    let amount = Number(document.getElementById("amount").value);
+    let message = document.getElementById("message");
+
+    if (amount <= 0 || isNaN(amount)) {
+        message.style.color = "red";
+        message.innerText = "Invalid amount!";
+        return;
+    }
+
+    balance += amount;
+    document.getElementById("balance").innerText = balance;
+    message.style.color = "green";
+    message.innerText = "Amount Deposited!";
+}
+
+function withdraw() {
+    let amount = Number(document.getElementById("amount").value);
+    let message = document.getElementById("message");
+
+    if (amount <= 0 || isNaN(amount)) {
+        message.style.color = "red";
+        message.innerText = "Invalid amount!";
+        return;
+    }
+
+    if (amount > balance) {
+        message.style.color = "red";
+        message.innerText = "Invalid Amount!";
+        return;
+    }
+
+    balance -= amount;
+    document.getElementById("balance").innerText = balance;
+    message.style.color = "green";
+    message.innerText = "Amount Withdrawn!";
+}
+</script>
+
+</body>
+</html>
