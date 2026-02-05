@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Filter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ---------- Base ---------- */
+*{
+    box-sizing:border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+}
+
+body{
+    background:#ffffff;
+    padding:40px;
+    color:#111;
+}
+
+/* ---------- Heading ---------- */
+h1{
+    font-size:48px;
+    margin-bottom:25px;
+}
+
+/* ---------- Filter Row ---------- */
+.filter-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:40px;
+}
+
+.filter-row label{
+    font-size:22px;
+}
+
+select{
+    width:320px;
+    padding:14px 18px;
+    font-size:18px;
+    border-radius:10px;
+    border:1.5px solid #cfd8e3;
+    outline:none;
+}
+
+/* ---------- Grid ---------- */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:40px;
+    max-width:700px;
+}
+
+/* ---------- Card ---------- */
+.card{
+    border:1.5px solid #cfd8e3;
+    border-radius:16px;
+    padding:32px;
+    background:#fff;
+    box-shadow:0 0 0 rgba(0,0,0,0);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+/* ---------- Card Text ---------- */
+.title{
+    font-size:28px;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:22px;
+    font-weight:500;
+    margin-bottom:18px;
+}
+
+/* ---------- Category Pill ---------- */
+.badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:18px;
+    color:white;
+}
+
+.electronics{
+    background:#2f6bff;
+}
+
+.clothing{
+    background:#9cc4ff;
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:600px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Product Filter</h1>
+
+<div class="filter-row">
+    <label>Filter by:</label>
+    <select id="filter">
+        <option value="all">All Products</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+    </select>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const products = [
+ {name:"Wireless Headphones", price:129.99, category:"electronics"},
+ {name:"Cotton T-Shirt", price:24.99, category:"clothing"},
+ {name:"Bluetooth Speaker", price:89.99, category:"electronics"},
+ {name:"Denim Jeans", price:59.99, category:"clothing"}
+];
+
+const grid = document.getElementById("grid");
+const filter = document.getElementById("filter");
+
+function render(items){
+    grid.innerHTML="";
+    items.forEach(p=>{
+        const card=document.createElement("div");
+        card.className="card";
+        card.innerHTML=`
+            <div class="title">${p.name}</div>
+            <div class="price">$${p.price.toFixed(2)}</div>
+            <span class="badge ${p.category}">
+                ${p.category}
+            </span>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+filter.addEventListener("change",()=>{
+    const value=filter.value;
+    if(value==="all"){
+        render(products);
+    }else{
+        render(products.filter(p=>p.category===value));
+    }
+});
+
+render(products);
+</script>
+
+</body>
+</html>
