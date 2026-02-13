@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    input {
+      padding: 8px;
+      margin: 5px;
+      width: 60%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .add-btn {
+      background: #2563eb;
+      color: white;
+    }
+    .remove-btn {
+      background: #dc2626;
+      color: white;
+    }
+    .book {
+      background: white;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .book-info {
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Library Management System</h1>
+  <div class="container">
+    <input type="text" id="search" placeholder="Search books..." onkeyup="searchBook()"><br>
+    <input type="text" id="title" placeholder="Book Title">
+    <input type="text" id="author" placeholder="Author">
+    <button class="add-btn" onclick="addBook()">Add Book</button>
+    <div id="bookList"></div>
+  </div>
+  <script>
+    let books = [
+      { title: "Atomic Habits", author: "James Clear" },
+      { title: "The Alchemist", author: "Paulo Coelho" },
+      { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki" }
+    ];
+    function displayBooks(list) {
+      const bookList = document.getElementById("bookList");
+      bookList.innerHTML = "";
+      list.forEach((book, index) => {
+        bookList.innerHTML += `
+          <div class="book">
+            <div class="book-info">
+              <strong>${book.title}</strong><br>
+              by ${book.author}
+            </div>
+            <button class="remove-btn" onclick="removeBook(${index})">Remove</button>
+          </div>
+        `;
+      });
+    }
+    function addBook() {
+      const title = document.getElementById("title").value;
+      const author = document.getElementById("author").value;
+      if (title && author) {
+        books.push({ title, author });
+        displayBooks(books);
+        document.getElementById("title").value = "";
+        document.getElementById("author").value = "";
+      }
+    }
+    function removeBook(index) {
+      books.splice(index, 1);
+      displayBooks(books);
+    }
+    function searchBook() {
+      const search = document.getElementById("search").value.toLowerCase();
+      const filtered = books.filter(book =>
+        book.title.toLowerCase().includes(search) ||
+        book.author.toLowerCase().includes(search)
+      );
+      displayBooks(filtered);
+    }
+    displayBooks(books);
+  </script>
+</body>
+</html>

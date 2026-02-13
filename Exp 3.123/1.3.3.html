@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Person Class Hierarchy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      padding: 30px;
+      text-align: center;
+    }
+    .card {
+      background: white;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    p {
+      margin: 5px 0;
+    }
+    .intro {
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Person Class Hierarchy</h1>
+  <div id="output"></div>
+  <script>
+    class Person {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      introduce() {
+        return `Hello, my name is ${this.name}.`;
+      }
+    }
+    class Student extends Person {
+      constructor(name, age, major) {
+        super(name, age);
+        this.major = major;
+      }
+      introduce() {
+        return `Hello, my name is ${this.name} and I'm studying ${this.major}.`;
+      }
+    }
+    class Teacher extends Person {
+      constructor(name, age, subject) {
+        super(name, age);
+        this.subject = subject;
+      }
+      introduce() {
+        return `Hello, my name is ${this.name} and I teach ${this.subject}.`;
+      }
+    }
+    const people = [
+      new Person("Anil Kumar", 32),
+      new Student("Swarnim", 22, "Data Science"),
+      new Teacher("Mr. Arul Kumar", 25, "Full Stack Development")
+    ];
+    const output = document.getElementById("output");
+    people.forEach(person => {
+      output.innerHTML += `
+        <div class="card">
+          <h2>${person.name} (${person.constructor.name})</h2>
+          <p><strong>Age:</strong> ${person.age}</p>
+          <p class="intro">${person.introduce()}</p>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

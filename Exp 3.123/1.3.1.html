@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Cards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+    }
+    .card {
+      background: white;
+      width: 250px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .image-box {
+      height: 150px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    h3 {
+      margin: 10px 0;
+    }
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .stock {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .in-stock {
+      background: #d1fae5;
+      color: green;
+    }
+    .out-stock {
+      background: #fee2e2;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="image-box"></div>
+    <h3>Headphones</h3>
+    <div class="price">$129.99</div>
+    <div class="stock in-stock">In Stock</div>
+  </div>
+  <div class="card">
+    <div class="image-box"></div>
+    <h3>Keyboard</h3>
+    <div class="price">$89.99</div>
+    <div class="stock out-stock">Out of Stock</div>
+  </div>
+  <div class="card">
+    <div class="image-box"></div>
+    <h3>Watch</h3>
+    <div class="price">$200.99</div>
+    <div class="stock in-stock">In Stock</div>
+  </div>
+</body>
+</html>
